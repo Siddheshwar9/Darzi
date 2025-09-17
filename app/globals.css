@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens to use new color scheme: #bc4b51 background, #f4a259 accent */
+  --background: #bc4b51; /* Burgundy red background */
+  --foreground: #ffffff; /* White text for contrast */
+  --card: #ffffff; /* White card backgrounds */
+  --card-foreground: #2d3e2a; /* Dark green text on cards */
+  --popover: #ffffff; /* White popover backgrounds */
+  --popover-foreground: #2d3e2a; /* Dark green text in popovers */
+  --primary: #f4a259; /* Warm orange primary actions */
+  --primary-foreground: #ffffff; /* White text on primary buttons */
+  --secondary: #d4626b; /* Lighter burgundy for secondary */
+  --secondary-foreground: #ffffff; /* White text on secondary buttons */
+  --muted: #f8f9fa; /* Very light muted backgrounds */
+  --muted-foreground: #6c757d; /* Gray muted text */
+  --accent: #f4a259; /* Warm orange accent highlights */
+  --accent-foreground: #ffffff; /* White text on accent backgrounds */
+  --destructive: #dc3545; /* Red destructive actions */
+  --destructive-foreground: #ffffff; /* White text on destructive buttons */
+  --border: #dee2e6; /* Light gray border color */
+  --input: #ffffff; /* White input fields */
+  --ring: rgba(244, 162, 89, 0.3); /* Orange focus ring */
+  --chart-1: #f4a259; /* Orange chart color */
+  --chart-2: #bc4b51; /* Burgundy chart color */
+  --chart-3: #d4626b; /* Lighter burgundy chart color */
+  --chart-4: #e67e22; /* Darker orange chart color */
+  --chart-5: #95a5a6; /* Gray chart color */
+  --radius: 0.5rem; /* Corner rounding for cards and buttons */
+  --sidebar: #ffffff; /* White sidebar background */
+  --sidebar-foreground: #2d3e2a; /* Dark green sidebar text */
+  --sidebar-primary: #f8f9fa; /* Light gray sidebar primary background */
+  --sidebar-primary-foreground: #2d3e2a; /* Dark green text on sidebar primary */
+  --sidebar-accent: #f4a259; /* Orange sidebar accent color */
+  --sidebar-accent-foreground: #ffffff; /* White text on sidebar accent */
+  --sidebar-border: #dee2e6; /* Light gray sidebar border */
+  --sidebar-ring: rgba(244, 162, 89, 0.3); /* Orange sidebar focus ring */
+}
+
+.dark {
+  --background: #8b3a42; /* Darker burgundy for dark mode */
+  --foreground: #ecf0f1;
+  --card: #34495e;
+  --card-foreground: #ecf0f1;
+  --popover: #34495e;
+  --popover-foreground: #ecf0f1;
+  --primary: #f39c12;
+  --primary-foreground: #2c3e50;
+  --secondary: #7f8c8d;
+  --secondary-foreground: #ecf0f1;
+  --muted: #34495e;
+  --muted-foreground: #bdc3c7;
+  --accent: #f39c12;
+  --accent-foreground: #2c3e50;
+  --destructive: #e74c3c;
+  --destructive-foreground: #ecf0f1;
+  --border: #34495e;
+  --input: #34495e;
+  --ring: rgba(243, 156, 18, 0.3);
+  --chart-1: #f39c12;
+  --chart-2: #bc4b51;
+  --chart-3: #7f8c8d;
+  --chart-4: #e67e22;
+  --chart-5: #95a5a6;
+  --sidebar: #2c3e50;
+  --sidebar-foreground: #ecf0f1;
+  --sidebar-primary: #34495e;
+  --sidebar-primary-foreground: #ecf0f1;
+  --sidebar-accent: #f39c12;
+  --sidebar-accent-foreground: #2c3e50;
+  --sidebar-border: #34495e;
+  --sidebar-ring: rgba(243, 156, 18, 0.3);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
