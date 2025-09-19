@@ -4,75 +4,76 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color tokens to use new color scheme: #bc4b51 background, #f4a259 accent */
-  --background: #bc4b51; /* Burgundy red background */
-  --foreground: #ffffff; /* White text for contrast */
-  --card: #ffffff; /* White card backgrounds */
-  --card-foreground: #2d3e2a; /* Dark green text on cards */
-  --popover: #ffffff; /* White popover backgrounds */
-  --popover-foreground: #2d3e2a; /* Dark green text in popovers */
-  --primary: #f4a259; /* Warm orange primary actions */
+  /* Updated to warm brown and sage green color palette */
+  --background: #f7f4ea; /* Very light cream background */
+  --foreground: #3a3a3a; /* Dark text for readability */
+  --card: #ebd9d1; /* Light beige card background */
+  --card-foreground: #3a3a3a; /* Dark text within cards */
+  --popover: #f7f4ea; /* Light cream popover background */
+  --popover-foreground: #3a3a3a; /* Dark text within popovers */
+  --primary: #a8bba3; /* Sage green primary color */
   --primary-foreground: #ffffff; /* White text on primary buttons */
-  --secondary: #d4626b; /* Lighter burgundy for secondary */
+  --secondary: #b87c4c; /* Warm brown secondary color */
   --secondary-foreground: #ffffff; /* White text on secondary buttons */
-  --muted: #f8f9fa; /* Very light muted backgrounds */
-  --muted-foreground: #6c757d; /* Gray muted text */
-  --accent: #f4a259; /* Warm orange accent highlights */
+  --muted: #ebd9d1; /* Light beige for muted sections */
+  --muted-foreground: #6b6b6b; /* Medium gray muted text */
+  --accent: #b87c4c; /* Warm brown accent color */
   --accent-foreground: #ffffff; /* White text on accent backgrounds */
-  --destructive: #dc3545; /* Red destructive actions */
-  --destructive-foreground: #ffffff; /* White text on destructive buttons */
-  --border: #dee2e6; /* Light gray border color */
-  --input: #ffffff; /* White input fields */
-  --ring: rgba(244, 162, 89, 0.3); /* Orange focus ring */
-  --chart-1: #f4a259; /* Orange chart color */
-  --chart-2: #bc4b51; /* Burgundy chart color */
-  --chart-3: #d4626b; /* Lighter burgundy chart color */
-  --chart-4: #e67e22; /* Darker orange chart color */
-  --chart-5: #95a5a6; /* Gray chart color */
-  --radius: 0.5rem; /* Corner rounding for cards and buttons */
-  --sidebar: #ffffff; /* White sidebar background */
-  --sidebar-foreground: #2d3e2a; /* Dark green sidebar text */
-  --sidebar-primary: #f8f9fa; /* Light gray sidebar primary background */
-  --sidebar-primary-foreground: #2d3e2a; /* Dark green text on sidebar primary */
-  --sidebar-accent: #f4a259; /* Orange sidebar accent color */
-  --sidebar-accent-foreground: #ffffff; /* White text on sidebar accent */
-  --sidebar-border: #dee2e6; /* Light gray sidebar border */
-  --sidebar-ring: rgba(244, 162, 89, 0.3); /* Orange sidebar focus ring */
+  --destructive: #be123c; /* Error color */
+  --destructive-foreground: #ffffff; /* White text on error buttons */
+  --border: #d4c4b8; /* Soft brown border */
+  --input: #ffffff; /* White input field background */
+  --ring: rgba(168, 187, 163, 0.3); /* Sage green focus ring */
+  --chart-1: #a8bba3; /* Sage green chart color */
+  --chart-2: #b87c4c; /* Warm brown chart color */
+  --chart-3: #ebd9d1; /* Light beige chart color */
+  --chart-4: #f7f4ea; /* Very light cream chart color */
+  --chart-5: #8fa68a; /* Darker sage green chart color */
+  --radius: 0.5rem;
+  --sidebar: #ebd9d1;
+  --sidebar-foreground: #3a3a3a;
+  --sidebar-primary: #a8bba3;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #b87c4c;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #d4c4b8;
+  --sidebar-ring: rgba(168, 187, 163, 0.3);
 }
 
 .dark {
-  --background: #8b3a42; /* Darker burgundy for dark mode */
-  --foreground: #ecf0f1;
-  --card: #34495e;
-  --card-foreground: #ecf0f1;
-  --popover: #34495e;
-  --popover-foreground: #ecf0f1;
-  --primary: #f39c12;
-  --primary-foreground: #2c3e50;
-  --secondary: #7f8c8d;
-  --secondary-foreground: #ecf0f1;
-  --muted: #34495e;
-  --muted-foreground: #bdc3c7;
-  --accent: #f39c12;
-  --accent-foreground: #2c3e50;
-  --destructive: #e74c3c;
-  --destructive-foreground: #ecf0f1;
-  --border: #34495e;
-  --input: #34495e;
-  --ring: rgba(243, 156, 18, 0.3);
-  --chart-1: #f39c12;
-  --chart-2: #bc4b51;
-  --chart-3: #7f8c8d;
-  --chart-4: #e67e22;
-  --chart-5: #95a5a6;
-  --sidebar: #2c3e50;
-  --sidebar-foreground: #ecf0f1;
-  --sidebar-primary: #34495e;
-  --sidebar-primary-foreground: #ecf0f1;
-  --sidebar-accent: #f39c12;
-  --sidebar-accent-foreground: #2c3e50;
-  --sidebar-border: #34495e;
-  --sidebar-ring: rgba(243, 156, 18, 0.3);
+  /* Dark mode with warm brown and sage green theme */
+  --background: #2a2520; /* Dark warm background */
+  --foreground: #f7f4ea; /* Light cream text */
+  --card: #3a342e; /* Dark warm card background */
+  --card-foreground: #f7f4ea; /* Light cream text on cards */
+  --popover: #3a342e; /* Dark warm popover */
+  --popover-foreground: #f7f4ea; /* Light cream text in popovers */
+  --primary: #a8bba3; /* Sage green primary */
+  --primary-foreground: #ffffff; /* White text on primary */
+  --secondary: #b87c4c; /* Warm brown secondary */
+  --secondary-foreground: #ffffff; /* White text on secondary */
+  --muted: #3a342e; /* Dark warm muted background */
+  --muted-foreground: #b8a898; /* Light brown muted text */
+  --accent: #b87c4c; /* Warm brown accent */
+  --accent-foreground: #ffffff; /* White text on accent */
+  --destructive: #be123c; /* Error color */
+  --destructive-foreground: #ffffff; /* White text on error */
+  --border: #4a453f; /* Dark warm border */
+  --input: #3a342e; /* Dark warm input background */
+  --ring: rgba(168, 187, 163, 0.3); /* Sage green focus ring */
+  --chart-1: #a8bba3;
+  --chart-2: #b87c4c;
+  --chart-3: #ebd9d1;
+  --chart-4: #f7f4ea;
+  --chart-5: #8fa68a;
+  --sidebar: #3a342e;
+  --sidebar-foreground: #f7f4ea;
+  --sidebar-primary: #a8bba3;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #b87c4c;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #4a453f;
+  --sidebar-ring: rgba(168, 187, 163, 0.3);
 }
 
 @theme inline {
