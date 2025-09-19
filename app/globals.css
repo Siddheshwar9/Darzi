@@ -4,76 +4,97 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated to warm brown and sage green color palette */
-  --background: #f7f4ea; /* Very light cream background */
-  --foreground: #3a3a3a; /* Dark text for readability */
-  --card: #ebd9d1; /* Light beige card background */
-  --card-foreground: #3a3a3a; /* Dark text within cards */
-  --popover: #f7f4ea; /* Light cream popover background */
-  --popover-foreground: #3a3a3a; /* Dark text within popovers */
-  --primary: #a8bba3; /* Sage green primary color */
-  --primary-foreground: #ffffff; /* White text on primary buttons */
-  --secondary: #b87c4c; /* Warm brown secondary color */
-  --secondary-foreground: #ffffff; /* White text on secondary buttons */
-  --muted: #ebd9d1; /* Light beige for muted sections */
-  --muted-foreground: #6b6b6b; /* Medium gray muted text */
-  --accent: #b87c4c; /* Warm brown accent color */
-  --accent-foreground: #ffffff; /* White text on accent backgrounds */
-  --destructive: #be123c; /* Error color */
-  --destructive-foreground: #ffffff; /* White text on error buttons */
-  --border: #d4c4b8; /* Soft brown border */
-  --input: #ffffff; /* White input field background */
-  --ring: rgba(168, 187, 163, 0.3); /* Sage green focus ring */
-  --chart-1: #a8bba3; /* Sage green chart color */
-  --chart-2: #b87c4c; /* Warm brown chart color */
-  --chart-3: #ebd9d1; /* Light beige chart color */
-  --chart-4: #f7f4ea; /* Very light cream chart color */
-  --chart-5: #8fa68a; /* Darker sage green chart color */
+  /* Light Theme */
+  --background: #FBF9D1; /* pale cream background */
+  /* --foreground: #C1856D; brown text */
+
+  --card: #E6CFA9; 
+  --card-foreground: #9A3F3F;
+
+  --popover: #E6CFA9;
+  --popover-foreground: #9A3F3F;
+
+  --primary: #9A3F3F; /* brown buttons */
+  --primary-foreground: #FBF9D1;
+
+  --secondary: #C1856D; 
+  --secondary-foreground: #FBF9D1;
+
+  --muted: #E6CFA9;
+  --muted-foreground: #9A3F3F;
+
+  --accent: #9A3F3F; 
+  --accent-foreground: #FBF9D1;
+
+  --destructive: #9A3F3F;
+  --destructive-foreground: #FBF9D1;
+
+  --border: #C1856D;
+  --input: #ffffff;
+  --ring: rgba(154, 63, 63, 0.4);
+
+  --chart-1: #9A3F3F;
+  --chart-2: #C1856D;
+  --chart-3: #E6CFA9;
+  --chart-4: #FBF9D1;
+  --chart-5: #b96b62;
+
   --radius: 0.5rem;
-  --sidebar: #ebd9d1;
-  --sidebar-foreground: #3a3a3a;
-  --sidebar-primary: #a8bba3;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #b87c4c;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #d4c4b8;
-  --sidebar-ring: rgba(168, 187, 163, 0.3);
+
+  --sidebar: #E6CFA9;
+  --sidebar-foreground: #9A3F3F;
+  --sidebar-primary: #9A3F3F;
+  --sidebar-primary-foreground: #FBF9D1;
+  --sidebar-accent: #C1856D;
+  --sidebar-accent-foreground: #FBF9D1;
+  --sidebar-border: #9A3F3F;
+  --sidebar-ring: rgba(154, 63, 63, 0.4);
 }
 
 .dark {
-  /* Dark mode with warm brown and sage green theme */
-  --background: #2a2520; /* Dark warm background */
-  --foreground: #f7f4ea; /* Light cream text */
-  --card: #3a342e; /* Dark warm card background */
-  --card-foreground: #f7f4ea; /* Light cream text on cards */
-  --popover: #3a342e; /* Dark warm popover */
-  --popover-foreground: #f7f4ea; /* Light cream text in popovers */
-  --primary: #a8bba3; /* Sage green primary */
-  --primary-foreground: #ffffff; /* White text on primary */
-  --secondary: #b87c4c; /* Warm brown secondary */
-  --secondary-foreground: #ffffff; /* White text on secondary */
-  --muted: #3a342e; /* Dark warm muted background */
-  --muted-foreground: #b8a898; /* Light brown muted text */
-  --accent: #b87c4c; /* Warm brown accent */
-  --accent-foreground: #ffffff; /* White text on accent */
-  --destructive: #be123c; /* Error color */
-  --destructive-foreground: #ffffff; /* White text on error */
-  --border: #4a453f; /* Dark warm border */
-  --input: #3a342e; /* Dark warm input background */
-  --ring: rgba(168, 187, 163, 0.3); /* Sage green focus ring */
-  --chart-1: #a8bba3;
-  --chart-2: #b87c4c;
-  --chart-3: #ebd9d1;
-  --chart-4: #f7f4ea;
-  --chart-5: #8fa68a;
-  --sidebar: #3a342e;
-  --sidebar-foreground: #f7f4ea;
-  --sidebar-primary: #a8bba3;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #b87c4c;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #4a453f;
-  --sidebar-ring: rgba(168, 187, 163, 0.3);
+  /* Dark Theme */
+  --background: #9A3F3F; /* deep brown base */
+  --foreground: #E6CFA9; /* beige text */
+
+  --card: #C1856D; 
+  --card-foreground: #FBF9D1;
+
+  --popover: #C1856D;
+  --popover-foreground: #FBF9D1;
+
+  --primary: #C1856D; /* brown buttons */
+  --primary-foreground: #FBF9D1;
+
+  --secondary: #E6CFA9;
+  --secondary-foreground: #9A3F3F;
+
+  --muted: #641B2E;
+  --muted-foreground: #E6CFA9;
+
+  --accent: #C1856D;
+  --accent-foreground: #FBF9D1;
+
+  --destructive: #9A3F3F;
+  --destructive-foreground: #FBF9D1;
+
+  --border: #C1856D;
+  --input: #641B2E;
+  --ring: rgba(193, 133, 109, 0.4);
+
+  --chart-1: #C1856D;
+  --chart-2: #9A3F3F;
+  --chart-3: #E6CFA9;
+  --chart-4: #FBF9D1;
+  --chart-5: #d3a891;
+
+  --sidebar: #641B2E;
+  --sidebar-foreground: #FBF9D1;
+  --sidebar-primary: #C1856D;
+  --sidebar-primary-foreground: #FBF9D1;
+  --sidebar-accent: #E6CFA9;
+  --sidebar-accent-foreground: #9A3F3F;
+  --sidebar-border: #C1856D;
+  --sidebar-ring: rgba(193, 133, 109, 0.4);
 }
 
 @theme inline {
@@ -125,3 +146,4 @@
     @apply bg-background text-foreground;
   }
 }
+

@@ -61,7 +61,7 @@ export default function HomePage() {
             <img
               src="/professional-tailor-working-on-custom-clothing-in-.jpg"
               alt="Professional tailor crafting custom clothing"
-              className="rounded-lg shadow-2xl w-full"
+              className="rounded-lg shadow-2xl w-full max-w-lg mx-auto object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent rounded-lg" />
           </div>
