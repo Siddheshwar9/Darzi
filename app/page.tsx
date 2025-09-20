@@ -23,12 +23,16 @@ export default function HomePage() {
               <Link href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
                 Pricing
               </Link>
-              <Button variant="outline" size="sm">
-                Sign In
-              </Button>
-              <Button size="sm" className="bg-accent hover:bg-accent/90">
-                Get Started
-              </Button>
+              <Link href="/auth">
+                <Button variant="outline" size="sm">
+                  Sign In
+                </Button>
+              </Link>
+              <Link href="/auth">
+                <Button size="sm" className="bg-accent hover:bg-accent/90">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -48,12 +52,16 @@ export default function HomePage() {
             technology, and intelligent matching for perfect custom garments.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-lg px-8">
-              Start Your Order
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 bg-transparent">
-              Join as Tailor
-            </Button>
+            <Link href="/auth">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-lg px-8">
+                Start Your Order
+              </Button>
+            </Link>
+            <Link href="/auth">
+              <Button variant="outline" size="lg" className="text-lg px-8 bg-transparent">
+                Join as Tailor
+              </Button>
+            </Link>
           </div>
 
           {/* Hero Image Placeholder */}
@@ -61,7 +69,7 @@ export default function HomePage() {
             <img
               src="/professional-tailor-working-on-custom-clothing-in-.jpg"
               alt="Professional tailor crafting custom clothing"
-              className="rounded-lg shadow-2xl w-full max-w-lg mx-auto object-cover"
+              className="rounded-lg shadow-2xl w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent rounded-lg" />
           </div>
@@ -198,9 +206,11 @@ export default function HomePage() {
             Join thousands of satisfied customers who trust Darzi for their custom clothing needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8">
-              Start Your Order
-            </Button>
+            <Link href="/auth">
+              <Button size="lg" variant="secondary" className="text-lg px-8">
+                Start Your Order
+              </Button>
+            </Link>
             <Button
               size="lg"
               variant="outline"
