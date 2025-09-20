@@ -28,7 +28,7 @@ export default function HomePage() {
                   Sign In
                 </Button>
               </Link>
-              <Link href="/auth">
+              <Link href="/get-started">
                 <Button size="sm" className="bg-accent hover:bg-accent/90">
                   Get Started
                 </Button>
@@ -52,7 +52,7 @@ export default function HomePage() {
             technology, and intelligent matching for perfect custom garments.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/auth">
+            <Link href="/get-started">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-lg px-8">
                 Start Your Order
               </Button>
@@ -206,7 +206,7 @@ export default function HomePage() {
             Join thousands of satisfied customers who trust Darzi for their custom clothing needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth">
+            <Link href="/get-started">
               <Button size="lg" variant="secondary" className="text-lg px-8">
                 Start Your Order
               </Button>
