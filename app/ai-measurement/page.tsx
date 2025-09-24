@@ -266,7 +266,7 @@ export default function AIMeasurementPage() {
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
                         <span className="text-sm">Overall Accuracy</span>
-                        <span className="text-sm font-medium">95%</span>
+                        <span className="text-sm font-medium">96%</span>
                       </div>
                       <Progress value={95} className="h-2" />
                     </div>

@@ -53,7 +53,7 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold">Welcome back, Master Ahmed</h1>
+            <h1 className="text-3xl font-bold">Welcome back, Master Raju</h1>
             <p className="text-muted-foreground">Here's what's happening with your tailoring business</p>
           </div>
           <div className="flex items-center space-x-2">
@@ -152,7 +152,7 @@ export default function DashboardPage() {
                           customer: "Sneha Singh",
                           item: "Formal Blazer",
                           status: "Pending",
-                          amount: "₹3,200",
+                          amount: "₹3,250",
                         },
                       ].map((order) => (
                         <div key={order.id} className="flex items-center justify-between p-4 border rounded-lg">
