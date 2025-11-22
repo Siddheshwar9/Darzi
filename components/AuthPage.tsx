@@ -2,21 +2,77 @@
 
 import type React from "react"
 import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { supabase } from "@/lib/supabaseClient"
 
 type Role = "customer" | "tailor"
 type Mode = "login" | "signup"
 
 const AuthPage: React.FC = () => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const returnUrl = searchParams.get("returnUrl")
+
   const [role, setRole] = useState<Role>("customer")
   const [mode, setMode] = useState<Mode>("login")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log({ role, mode, email, password })
-    // TODO: Call your backend API here
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (mode === "signup") {
+      // 1️⃣ Create auth account with metadata
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            role: role,
+          },
+        },
+      });
+
+      if (authError) {
+        alert(authError.message);
+        return;
+      }
+
+      const user = authData.user;
+      if (!user) {
+        alert("Signup failed.");
+        return;
+      }
+
+      // Database trigger handles profile creation now
+
+      alert("Account created! Please verify your email before logging in.");
+      // Optional: Redirect or keep them here to check email
+    }
+
+    else if (mode === "login") {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        if (error.message.includes("Email not confirmed")) {
+          alert("Please verify your email address. Check your inbox (and spam folder) for a confirmation link from Supabase.");
+        } else {
+          alert(error.message);
+        }
+        return;
+      }
+
+      alert("Logged in! Redirecting...");
+      if (returnUrl) {
+        router.push(returnUrl);
+      } else {
+        router.push("/dashboard");
+      }
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">

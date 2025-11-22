@@ -90,24 +90,11 @@ export default function HomePage() {
             <Card className="border-0 shadow-lg">
               <CardHeader>
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <Zap className="h-6 w-6 text-accent" />
-                </div>
-                <CardTitle>AI-Powered Measurements</CardTitle>
-                <CardDescription>
-                  Advanced image analysis technology provides accurate body measurements through smart photo capture.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                   <Users className="h-6 w-6 text-accent" />
                 </div>
-                <CardTitle>Smart Tailor Matching</CardTitle>
+                <CardTitle>Verified Tailors</CardTitle>
                 <CardDescription>
-                  Intelligent recommendation engine matches you with ideal tailors based on location, ratings, and
-                  expertise.
+                  All tailors are verified and rated by customers.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -115,11 +102,23 @@ export default function HomePage() {
             <Card className="border-0 shadow-lg">
               <CardHeader>
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <DarziLogo size="sm" className="text-accent" />
+                  <Zap className="h-6 w-6 text-accent" />
                 </div>
-                <CardTitle>Virtual Try-On</CardTitle>
+                <CardTitle>Green Points Rewards</CardTitle>
                 <CardDescription>
-                  Visualize completed garments on digital avatars to ensure perfect fit and style before ordering.
+                  Earn rewards on every alteration and redesign.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+                  <Star className="h-6 w-6 text-accent" />
+                </div>
+                <CardTitle>Secure Payments</CardTitle>
+                <CardDescription>
+                  Escrow payments ensure both parties are protected.
                 </CardDescription>
               </CardHeader>
             </Card>
