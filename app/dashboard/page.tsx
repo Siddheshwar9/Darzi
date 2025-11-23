@@ -27,13 +27,17 @@ export default function DashboardPage() {
 
       if (error || !profile) {
         console.error("Error fetching profile:", error)
-        // If profile is missing, it means the trigger failed or user wasn't created properly.
-        // Redirect to auth with a clear error.
-        alert("User profile not found. Please contact support or try signing up again.");
+        // Detailed error for debugging
+        const errorMessage = error?.message || "Profile not found in database";
+        alert(`Dashboard Error: ${errorMessage}. \n\nPlease ensure you ran the 'create_tailor_profile.sql' or 'FINAL_fix_profile.sql' script in Supabase.`);
+
         await supabase.auth.signOut();
         router.push("/auth");
         return
       }
+
+      console.log("User role detected:", profile.role);
+      console.log("Redirecting to:", profile.role === "tailor" ? "/dashboard/tailor" : "/dashboard/customer");
 
       if (profile.role === "tailor") {
         router.push("/dashboard/tailor")

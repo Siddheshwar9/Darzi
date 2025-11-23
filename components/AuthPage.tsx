@@ -34,7 +34,12 @@ const AuthPage: React.FC = () => {
       });
 
       if (authError) {
-        alert(authError.message);
+        if (authError.message.includes("already registered") || authError.message.includes("unique constraint")) {
+          alert("This email is already registered. Please switch to Login.");
+          setMode("login");
+        } else {
+          alert(authError.message);
+        }
         return;
       }
 

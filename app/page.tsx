@@ -56,7 +56,7 @@ export default function HomePage() {
                 Start Your Order
               </Button>
             </Link>
-            <Link href="/auth">
+            <Link href="/auth/tailor">
               <Button variant="outline" size="lg" className="text-lg px-8 bg-transparent">
                 Join as Tailor
               </Button>
