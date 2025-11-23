@@ -67,7 +67,7 @@ export default function CustomerDashboard() {
             .order('created_at', { ascending: false })
 
         // Fetch tailors
-        const { data: tailorsData } = await supabase
+        const { data: tailorsData, error: tailorsError } = await supabase
             .from('tailors')
             .select(`
                 *,
@@ -78,6 +78,11 @@ export default function CustomerDashboard() {
                 )
             `)
             .limit(12)
+
+        if (tailorsError) {
+            console.error("Error fetching tailors:", tailorsError)
+        }
+        console.log("Fetched tailors:", tailorsData)
 
         setOrders(ordersData || [])
         setTailors(tailorsData || [])

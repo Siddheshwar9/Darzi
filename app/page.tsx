@@ -17,6 +17,9 @@ export default function HomePage() {
               <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
                 Features
               </Link>
+              <Link href="/restitch" className="text-muted-foreground hover:text-foreground transition-colors">
+                Restitched
+              </Link>
               <Link href="#tailors" className="text-muted-foreground hover:text-foreground transition-colors">
                 Find Tailors
               </Link>
