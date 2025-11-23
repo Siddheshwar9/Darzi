@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, Zap, Star, MapPin, Clock } from "lucide-react"
+import { Star, MapPin, Clock } from "lucide-react"
 import Link from "next/link"
 import { DarziLogo } from "@/components/darzi-logo"
 
@@ -48,8 +48,7 @@ export default function HomePage() {
             Connect with Skilled Tailors for <span className="text-accent">Custom Clothing</span>
           </h1>
           <p className="text-xl text-foreground text-balance mb-8 max-w-3xl mx-auto">
-            Darzi seamlessly connects you with professional tailors through AI-powered measurements, virtual try-on
-            technology, and intelligent matching for perfect custom garments.
+            Darzi connects customers with trusted local tailors, reviving retail through easy, accessible custom stitching.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link href="/get-started">
@@ -65,7 +64,7 @@ export default function HomePage() {
           </div>
 
           {/* Hero Image Placeholder */}
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-2xl mx-auto mt-12">
             <img
               src="/professional-tailor-working-on-custom-clothing-in-.jpg"
               alt="Professional tailor crafting custom clothing"
@@ -82,15 +81,15 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Powered by Intelligent Technology</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Experience the future of custom tailoring with AI-driven features that ensure perfect fit and style.
+              Strengthening the local tailoring ecosystem through smart matching, transparent pricing, and easy communication.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-accent" />
+            <Card className="border-0 shadow-lg h-full">
+              <CardHeader className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                  🎯
                 </div>
                 <CardTitle>Verified Tailors</CardTitle>
                 <CardDescription>
@@ -99,10 +98,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <Zap className="h-6 w-6 text-accent" />
+            <Card className="border-0 shadow-lg h-full">
+              <CardHeader className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                  💚
                 </div>
                 <CardTitle>Green Points Rewards</CardTitle>
                 <CardDescription>
@@ -111,10 +110,10 @@ export default function HomePage() {
               </CardHeader>
             </Card>
 
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-                  <Star className="h-6 w-6 text-accent" />
+            <Card className="border-0 shadow-lg h-full">
+              <CardHeader className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                  🔒
                 </div>
                 <CardTitle>Secure Payments</CardTitle>
                 <CardDescription>
@@ -163,7 +162,7 @@ export default function HomePage() {
                 image: "/experienced-tailor-with-formal-wear.jpg",
               },
             ].map((tailor, index) => (
-              <Card key={index} className="border-0 shadow-lg overflow-hidden">
+              <Card key={index} className="border-0 shadow-lg overflow-hidden h-full">
                 <div className="aspect-square relative">
                   <img
                     src={tailor.image || "/placeholder.svg"}
