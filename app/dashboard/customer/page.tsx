@@ -6,111 +6,202 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
     Scissors,
     Search,
     ShoppingBag,
-    User,
     MapPin,
     Star,
-    PlusCircle,
-    Loader2
+    Loader2,
+    LogOut,
+    Clock,
+    Eye
 } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabaseClient"
+import { useRouter } from "next/navigation"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function CustomerDashboard() {
+    const router = useRouter()
     const [orders, setOrders] = useState<any[]>([])
+    const [tailors, setTailors] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
+    const [searchTerm, setSearchTerm] = useState("")
+    const [locationFilter, setLocationFilter] = useState("All Locations")
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            const { data: { session } } = await supabase.auth.getSession()
-            if (!session) return
+        fetchData()
+    }, [])
 
-            const { data, error } = await supabase
-                .from('orders')
-                .select(`
-          *,
-          tailors (
-            shop_name,
-            profiles (
-              full_name,
-              avatar_url
-            )
-          )
-        `)
-                .eq('customer_id', session.user.id)
-                .order('created_at', { ascending: false })
-
-            if (error) {
-                console.error("Error fetching orders:", error)
-            } else {
-                setOrders(data || [])
-            }
-            setLoading(false)
+    const fetchData = async () => {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (!session) {
+            router.push("/auth")
+            return
         }
 
-        fetchOrders()
-    }, [])
+        // Fetch orders
+        const { data: ordersData } = await supabase
+            .from('orders')
+            .select(`
+                *,
+                tailors (
+                    shop_name,
+                    profiles (
+                        full_name,
+                        avatar_url
+                    )
+                )
+            `)
+            .eq('customer_id', session.user.id)
+            .order('created_at', { ascending: false })
+
+        // Fetch tailors
+        const { data: tailorsData } = await supabase
+            .from('tailors')
+            .select(`
+                *,
+                profiles (
+                    id,
+                    full_name,
+                    avatar_url
+                )
+            `)
+            .limit(12)
+
+        setOrders(ordersData || [])
+        setTailors(tailorsData || [])
+        setLoading(false)
+    }
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut()
+        router.push("/auth")
+    }
+
+    const filteredTailors = tailors.filter((tailor) => {
+        const matchesSearch = tailor.shop_name?.toLowerCase().includes(searchTerm.toLowerCase())
+        return matchesSearch
+    })
 
     return (
         <div className="min-h-screen bg-background">
             {/* Navigation */}
-            <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+            <nav className="border-b bg-card sticky top-0 z-50">
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="flex items-center space-x-2">
-                            <Scissors className="h-8 w-8 text-accent" />
-                            <span className="text-2xl font-bold text-foreground">Darzi</span>
+                            <Scissors className="h-6 w-6 text-accent" />
+                            <span className="text-xl font-bold">Darzi</span>
                         </Link>
-                        <div className="flex items-center space-x-4">
-                            <Button variant="ghost" size="sm">
-                                <ShoppingBag className="h-5 w-5" />
-                            </Button>
-                            <Avatar>
-                                <AvatarImage src="/customer-avatar.jpg" alt="Customer" />
-                                <AvatarFallback>CS</AvatarFallback>
-                            </Avatar>
-                        </div>
+                        <Button variant="outline" size="sm" onClick={handleLogout}>
+                            <LogOut className="h-4 w-4 mr-2" />
+                            Logout
+                        </Button>
                     </div>
                 </div>
             </nav>
 
             {/* Dashboard Content */}
-            <div className="container mx-auto px-4 py-8">
-                <div className="flex items-center justify-between mb-8">
-                    <div>
-                        <h1 className="text-3xl font-bold">Hello, Customer</h1>
-                        <p className="text-muted-foreground">Find tailors and track your orders</p>
-                    </div>
-                    <Link href="/order/new">
-                        <Button className="bg-primary text-primary-foreground">
-                            <PlusCircle className="h-4 w-4 mr-2" />
-                            New Order
-                        </Button>
-                    </Link>
+            <div className="container mx-auto px-4 py-8 max-w-7xl">
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold mb-2">Customer Dashboard</h1>
+                    <p className="text-muted-foreground">Browse tailors and manage your orders</p>
                 </div>
 
-                <Tabs defaultValue="active-orders" className="w-full">
+                <Tabs defaultValue="browse" className="w-full">
                     <TabsList className="grid w-full grid-cols-2 max-w-[400px]">
-                        <TabsTrigger value="active-orders">Active Orders</TabsTrigger>
-                        <TabsTrigger value="past-orders">Past Orders</TabsTrigger>
+                        <TabsTrigger value="browse">Browse Tailors</TabsTrigger>
+                        <TabsTrigger value="orders">My Orders</TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="active-orders" className="mt-6">
+                    {/* Browse Tailors Tab */}
+                    <TabsContent value="browse" className="mt-6">
+                        {/* Search */}
+                        <div className="mb-6">
+                            <div className="relative">
+                                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                                <Input
+                                    placeholder="Search tailors by name..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="pl-10"
+                                />
+                            </div>
+                        </div>
+
                         {loading ? (
-                            <div className="flex justify-center py-8">
+                            <div className="flex justify-center py-12">
+                                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                            </div>
+                        ) : filteredTailors.length === 0 ? (
+                            <div className="text-center py-12 border rounded-lg bg-muted/10">
+                                <Scissors className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                                <h3 className="text-lg font-medium">No tailors found</h3>
+                                <p className="text-muted-foreground">Try adjusting your search</p>
+                            </div>
+                        ) : (
+                            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                {filteredTailors.map((tailor) => (
+                                    <Card key={tailor.user_id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                                        <div className="h-32 bg-muted flex items-center justify-center">
+                                            <Avatar className="h-20 w-20">
+                                                <AvatarImage src={tailor.profiles?.avatar_url} />
+                                                <AvatarFallback className="text-2xl">
+                                                    {tailor.shop_name?.[0] || 'T'}
+                                                </AvatarFallback>
+                                            </Avatar>
+                                        </div>
+                                        <CardHeader>
+                                            <CardTitle className="text-lg">{tailor.shop_name || 'Tailor Shop'}</CardTitle>
+                                            <CardDescription>{tailor.profiles?.full_name}</CardDescription>
+                                            <div className="space-y-2 text-sm text-muted-foreground mt-2">
+                                                {tailor.location && (
+                                                    <div className="flex items-center space-x-1">
+                                                        <MapPin className="h-3 w-3" />
+                                                        <span>{tailor.location}</span>
+                                                    </div>
+                                                )}
+                                                {tailor.experience && (
+                                                    <div className="flex items-center space-x-1">
+                                                        <Clock className="h-3 w-3" />
+                                                        <span>{tailor.experience}</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <Link href={`/order/new?tailorId=${tailor.user_id}`}>
+                                                <Button className="w-full">Place Order</Button>
+                                            </Link>
+                                        </CardContent>
+                                    </Card>
+                                ))}
+                            </div>
+                        )}
+                    </TabsContent>
+
+                    {/* My Orders Tab */}
+                    <TabsContent value="orders" className="mt-6">
+                        {loading ? (
+                            <div className="flex justify-center py-12">
                                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
                             </div>
                         ) : orders.length === 0 ? (
                             <div className="text-center py-12 border rounded-lg bg-muted/10">
                                 <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                                <h3 className="text-lg font-medium">No active orders</h3>
-                                <p className="text-muted-foreground mb-4">Start by finding a tailor and placing an order.</p>
-                                <Link href="/tailors">
-                                    <Button>Find a Tailor</Button>
-                                </Link>
+                                <h3 className="text-lg font-medium">No orders yet</h3>
+                                <p className="text-muted-foreground mb-4">Start by browsing tailors and placing an order</p>
                             </div>
                         ) : (
                             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -119,10 +210,20 @@ export default function CustomerDashboard() {
                                         <CardHeader>
                                             <div className="flex justify-between items-start">
                                                 <div>
-                                                    <CardTitle className="capitalize">{order.description.split(':')[0] || 'Order'}</CardTitle>
+                                                    <CardTitle className="capitalize text-lg">
+                                                        {order.description?.split(':')[0] || 'Order'}
+                                                    </CardTitle>
                                                     <CardDescription>Order #{order.id.slice(0, 8)}</CardDescription>
                                                 </div>
-                                                <Badge variant={order.status === 'completed' ? 'default' : 'secondary'}>
+                                                <Badge
+                                                    className={
+                                                        order.status === 'completed' ? 'bg-green-500' :
+                                                            order.status === 'in_progress' ? 'bg-blue-500' :
+                                                                order.status === 'accepted' ? 'bg-purple-500' :
+                                                                    order.status === 'cancelled' ? 'bg-red-500' :
+                                                                        'bg-yellow-500'
+                                                    }
+                                                >
                                                     {order.status}
                                                 </Badge>
                                             </div>
@@ -140,13 +241,17 @@ export default function CustomerDashboard() {
                                             </div>
                                             <div className="space-y-2 text-sm">
                                                 <div className="flex justify-between">
-                                                    <span>Status</span>
-                                                    <span className="font-medium capitalize">{order.status}</span>
-                                                </div>
-                                                <div className="flex justify-between">
                                                     <span>Placed On</span>
-                                                    <span className="font-medium">{new Date(order.created_at).toLocaleDateString()}</span>
+                                                    <span className="font-medium">
+                                                        {new Date(order.created_at).toLocaleDateString()}
+                                                    </span>
                                                 </div>
+                                                {order.amount && (
+                                                    <div className="flex justify-between">
+                                                        <span>Amount</span>
+                                                        <span className="font-medium">₹{order.amount}</span>
+                                                    </div>
+                                                )}
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -154,41 +259,7 @@ export default function CustomerDashboard() {
                             </div>
                         )}
                     </TabsContent>
-
-                    <TabsContent value="past-orders" className="mt-6">
-                        <div className="text-center text-muted-foreground py-10">
-                            No past orders found.
-                        </div>
-                    </TabsContent>
                 </Tabs>
-
-                <div className="mt-12">
-                    <h2 className="text-2xl font-bold mb-6">Featured Tailors Near You</h2>
-                    <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
-                        {/* Placeholder Tailor Cards */}
-                        {[1, 2, 3, 4].map((i) => (
-                            <Card key={i} className="overflow-hidden hover:shadow-lg transition-shadow">
-                                <div className="h-32 bg-muted flex items-center justify-center">
-                                    <Scissors className="h-10 w-10 text-muted-foreground" />
-                                </div>
-                                <CardContent className="p-4">
-                                    <h3 className="font-bold text-lg">Tailor Shop {i}</h3>
-                                    <div className="flex items-center text-sm text-muted-foreground mb-2">
-                                        <MapPin className="h-3 w-3 mr-1" /> Mumbai, India
-                                    </div>
-                                    <div className="flex items-center text-sm font-medium mb-3">
-                                        <Star className="h-3 w-3 text-yellow-500 mr-1" /> 4.8 (120 reviews)
-                                    </div>
-                                    <div className="flex flex-wrap gap-1 mb-4">
-                                        <Badge variant="secondary" className="text-xs">Suits</Badge>
-                                        <Badge variant="secondary" className="text-xs">Dresses</Badge>
-                                    </div>
-                                    <Button className="w-full" variant="outline">View Profile</Button>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
             </div>
         </div>
     )

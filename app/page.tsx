@@ -51,9 +51,9 @@ export default function HomePage() {
             Darzi connects customers with trusted local tailors, reviving retail through easy, accessible custom stitching.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/get-started">
+            <Link href="/auth">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-lg px-8">
-                Start Your Order
+                Join as Customer
               </Button>
             </Link>
             <Link href="/auth/tailor">
@@ -204,18 +204,20 @@ export default function HomePage() {
             Join thousands of satisfied customers who trust Darzi for their custom clothing needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/get-started">
+            <Link href="/auth">
               <Button size="lg" variant="secondary" className="text-lg px-8">
-                Start Your Order
+                Join as Customer
               </Button>
             </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent bg-transparent"
-            >
-              Learn More
-            </Button>
+            <Link href="/auth/tailor">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-8 border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent bg-transparent"
+              >
+                Join as Tailor
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

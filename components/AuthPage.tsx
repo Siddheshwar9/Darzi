@@ -5,7 +5,6 @@ import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { supabase } from "@/lib/supabaseClient"
 
-type Role = "customer" | "tailor"
 type Mode = "login" | "signup"
 
 const AuthPage: React.FC = () => {
@@ -13,7 +12,6 @@ const AuthPage: React.FC = () => {
   const searchParams = useSearchParams()
   const returnUrl = searchParams.get("returnUrl")
 
-  const [role, setRole] = useState<Role>("customer")
   const [mode, setMode] = useState<Mode>("login")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -22,13 +20,12 @@ const AuthPage: React.FC = () => {
     e.preventDefault();
 
     if (mode === "signup") {
-      // 1️⃣ Create auth account with metadata
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
-            role: role,
+            role: "customer", // Always customer for this page
           },
         },
       });
@@ -49,10 +46,7 @@ const AuthPage: React.FC = () => {
         return;
       }
 
-      // Database trigger handles profile creation now
-
       alert("Account created! Please verify your email before logging in.");
-      // Optional: Redirect or keep them here to check email
     }
 
     else if (mode === "login") {
@@ -83,33 +77,10 @@ const AuthPage: React.FC = () => {
     <div className="flex items-center justify-center min-h-screen bg-background">
       <div className="bg-card w-full max-w-md rounded-xl shadow-lg p-8 border">
         {/* Header */}
-        <h2 className="text-2xl font-bold text-center text-card-foreground">Welcome Back</h2>
+        <h2 className="text-2xl font-bold text-center text-card-foreground">Welcome to Darzi</h2>
         <p className="text-muted-foreground text-center mb-6">
-          {mode === "login" ? "Sign in to your account" : "Create a new account"}
+          {mode === "login" ? "Sign in to your customer account" : "Create your customer account"}
         </p>
-
-        {/* Role Selection */}
-        <div className="mb-4">
-          <p className="text-card-foreground font-medium mb-2">I am a:</p>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => setRole("customer")}
-              className={`flex items-center justify-center px-4 py-2 rounded-lg border transition
-                ${role === "customer" ? "bg-primary text-primary-foreground" : "bg-card text-card-foreground border-border hover:bg-accent"}`}
-            >
-              <span className="mr-2">👤</span> Customer
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("tailor")}
-              className={`flex items-center justify-center px-4 py-2 rounded-lg border transition
-                ${role === "tailor" ? "bg-primary text-primary-foreground" : "bg-card text-card-foreground border-border hover:bg-accent"}`}
-            >
-              ✂️ Tailor
-            </button>
-          </div>
-        </div>
 
         {/* Login / Signup Tabs */}
         <div className="flex mb-6 border-b border-border">
@@ -161,18 +132,22 @@ const AuthPage: React.FC = () => {
             type="submit"
             className="w-full bg-primary text-primary-foreground py-2 rounded-lg hover:bg-primary/90 transition"
           >
-            {mode === "login"
-              ? `Login as ${role === "customer" ? "Customer" : "Tailor"}`
-              : `Sign Up as ${role === "customer" ? "Customer" : "Tailor"}`}
+            {mode === "login" ? "Login" : "Sign Up"}
           </button>
         </form>
 
-        {/* Forgot Password */}
-        {mode === "login" && (
-          <p className="text-center text-muted-foreground mt-4 text-sm cursor-pointer hover:underline hover:text-card-foreground transition">
-            Forgot your password?
+        {/* Link to Tailor Login */}
+        <div className="mt-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            Are you a tailor?{" "}
+            <button
+              onClick={() => router.push("/auth/tailor")}
+              className="text-primary hover:underline"
+            >
+              Login here
+            </button>
           </p>
-        )}
+        </div>
       </div>
     </div>
   )
